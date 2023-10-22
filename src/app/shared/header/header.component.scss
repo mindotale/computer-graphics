@@ -1,0 +1,20 @@
+.horizontal-menu {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .horizontal-menu li {
+    margin-right: 20px; /* Adjust the spacing between menu items */
+  }
+  
+  .horizontal-menu a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .horizontal-menu a:hover {
+    text-decoration: underline;
+  }
+  
