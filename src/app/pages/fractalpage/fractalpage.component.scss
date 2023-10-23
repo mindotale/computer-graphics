@@ -24,6 +24,14 @@
     height: 100px;
     align-items: center;
     justify-content: center;
+
+    color: var(--gray-800, #343A40);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 .fractal-board {
@@ -37,14 +45,13 @@
 }
 
 .fractal-input-menu {
+    margin-top: 50px;
     display: flex;
     width: 585px;
     height: 175px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    border: 2px dashed rgba(120, 120, 120, 0.4);
 }
 
 .fractal-input {
@@ -57,6 +64,19 @@
     height: auto;
     align-items: center;
     flex: 0 0 auto;
+}
+
+.fractal-color-menu {
+    display: flex;
+    width: auto;
+    height: auto;
+    align-items: flex-start;
+    flex: 0 0 auto;
+    justify-content: center;
+}
+
+.fractal-color-input {
+    width: 85px;
 }
 
 .draw-button {
