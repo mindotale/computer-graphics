@@ -6,13 +6,21 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { FractalpageComponent } from './pages/fractalpage/fractalpage.component';
+import { AboutpageComponent } from './pages/aboutpage/aboutpage.component';
+import { ColorpageComponent } from './pages/colorpage/colorpage.component';
+import { LearnpageComponent } from './pages/learnpage/learnpage.component';
+import { FigurespageComponent } from './pages/figurespage/figurespage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainpageComponent,
-    FractalpageComponent
+    FractalpageComponent,
+    AboutpageComponent,
+    ColorpageComponent,
+    LearnpageComponent,
+    FigurespageComponent
   ],
   imports: [
     BrowserModule,
