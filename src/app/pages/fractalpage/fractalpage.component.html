@@ -1,17 +1,19 @@
 <div class="page-content">
     <div class="fractal-column">
         <div class="fractal-title">Vicsek Fractal</div>
-        <div class="fractal-board"></div>
+        <div class="fractal-board">
+            
+        </div>
         <div class="fractal-input-menu">
             <div class="fractal-input">
                 <div class="input-group">
                     <span class="input-group-text">Iteration</span>
                     <div class="form">
-                      <input type="text" class="form-control" required>
+                      <input #iterationInput type="text" class="form-control" required>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-secondary draw-button">Draw</button>
+            <button type="button" class="btn btn-secondary draw-button" (click)="drawFractal(iterationInput.value)">Draw</button>
         </div>
     </div>
     <div class="fractal-column">
