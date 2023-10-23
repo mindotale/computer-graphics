@@ -9,20 +9,30 @@ import { Component } from '@angular/core';
 export class FractalpageComponent {
   iteration: number = 4;
 
+  scale: number = 0;
+  c: number = 1;
+
   drawFractal(iterationValue: string): void {
-    // Parse the input value as an integer
     this.iteration = parseInt(iterationValue, 10);
-
-    // Check if parsing was successful and it's a valid integer
     if (!isNaN( this.iteration)) {
-      // Use the 'iteration' variable as an integer
-      console.log('Integer Value:',  this.iteration);
-
-      // You can perform further actions with 'iteration'
-      // For example, call a function that uses 'iteration' for drawing a fractal.
     } else {
-      // Handle the case where the input is not a valid integer
       console.error('Invalid Integer Value');
+    }
+  }
+
+  drawNewton(scaleValue: string, cValue: string): void {
+    this.scale = parseInt(scaleValue, 10);
+    this.c = parseInt(cValue, 10);
+    
+    if (!isNaN( this.scale)) {
+    } else {
+      console.error('Invalid Scale Value');
+    }
+
+    this.c = parseInt(cValue, 10);
+    if (!isNaN( this.c)) {
+    } else {
+      console.error('Invalid C Value');
     }
   }
 }

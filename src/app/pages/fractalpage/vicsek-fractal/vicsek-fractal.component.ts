@@ -8,10 +8,10 @@ import { Component, OnInit, HostListener, Input } from '@angular/core';import * 
 export class VicsekFractalComponent implements OnInit {
   private p5!: p5;
   @Input() iterations: number = 0; 
-
+  
   constructor() {  }
 
-  ngOnInit() { }
+  ngOnInit() {  }
 
   ngAfterViewInit() {
     this.createCanvas();

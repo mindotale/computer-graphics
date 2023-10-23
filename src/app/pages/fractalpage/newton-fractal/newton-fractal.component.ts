@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input } from '@angular/core';
 import * as p5 from 'p5';
 
 @Component({
@@ -8,10 +8,15 @@ import * as p5 from 'p5';
 })
 export class NewtonFractalComponent implements OnInit, AfterViewInit {
   private p5!: p5;
+  @Input() Scale: number = 0;
+  @Input() C: number = 0;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("Scale = " ,this.Scale);
+    console.log("C = " ,this.C);
+  }
 
   ngAfterViewInit() {
     this.createCanvas();

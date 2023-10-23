@@ -2,7 +2,7 @@
     <div class="fractal-column">
         <div class="fractal-title">Vicsek Fractal</div>
         <div class="fractal-board">
-            <vicsek-fractal></vicsek-fractal>
+            <vicsek-fractal [iterations]="iteration"></vicsek-fractal>
         </div>
         <div class="fractal-input-menu">
             <div class="fractal-input">
@@ -19,14 +19,14 @@
     <div class="fractal-column">
         <div class="fractal-title">Newton Fractal</div>
         <div class="fractal-board">
-            <newton-fractal></newton-fractal>
+            <newton-fractal [Scale]="scale" [C]="c"></newton-fractal>
         </div>
         <div class="fractal-input-menu">
             <div class="fractal-input">
                 <div class="input-group">
                     <span class="input-group-text">Scale</span>
                     <div class="form">
-                      <input type="text" class="form-control" required>
+                      <input #scaleInput type="text" class="form-control" required>
                     </div>
                 </div>
             </div>
@@ -60,11 +60,12 @@
                 <div class="input-group">
                     <span class="input-group-text">C</span>
                     <div class="form">
-                      <input type="text" class="form-control" required>
+                      <input #cInput type="text" class="form-control" required>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-secondary draw-button">Draw</button>
+            <button type="button" class="btn btn-secondary draw-button" (click)="drawNewton(scaleInput.value,cInput.value)">Draw</button>
+ 
         </div>
     </div>
 </div>
