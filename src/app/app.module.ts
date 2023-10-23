@@ -10,6 +10,8 @@ import { AboutpageComponent } from './pages/aboutpage/aboutpage.component';
 import { ColorpageComponent } from './pages/colorpage/colorpage.component';
 import { LearnpageComponent } from './pages/learnpage/learnpage.component';
 import { FigurespageComponent } from './pages/figurespage/figurespage.component';
+import { VicsekFractalComponent } from './pages/fractalpage/vicsek-fractal/vicsek-fractal.component';
+import { NewtonFractalComponent } from './pages/fractalpage/newton-fractal/newton-fractal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FigurespageComponent } from './pages/figurespage/figurespage.component'
     AboutpageComponent,
     ColorpageComponent,
     LearnpageComponent,
-    FigurespageComponent
+    FigurespageComponent,
+    VicsekFractalComponent,
+    NewtonFractalComponent
   ],
   imports: [
     BrowserModule,
