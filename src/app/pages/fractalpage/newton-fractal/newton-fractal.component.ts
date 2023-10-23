@@ -35,7 +35,8 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit {
       p.color(0, 0, 255),  
       p.color(255, 255, 0),
     ];
-
+    
+    const c: number = 1;
     const tolerance: number = 0.001;
     const zeroTolerance = 0.000001;
     const maxIterations = 100;
@@ -67,7 +68,7 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit {
     };
 
     function newton(x: number, y: number) {
-      const bigCoeff = 1.0 / (4 * (x * x + y * y) * (x * x + y * y));
+      const bigCoeff = 1 / (4 * (x * x + y * y) * (x * x + y * y));
       return [
         0.75 * x + bigCoeff * (x * x * x - 6 * x * y * y),
         0.75 * y - bigCoeff * (6 * x * x * y - y * y * y),
@@ -79,13 +80,13 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit {
       while (iterations < maxIterations) {
         if (x * x + y * y < zeroTolerance) {
           return colors[0]; 
-        } else if ((x - 1) * (x - 1) + y * y < tolerance) {
+        } else if ((x - c) * (x - c) + y * y < tolerance) {
           return colors[1]; 
-        } else if (x * x + (y - 1) * (y - 1) < tolerance) {
+        } else if (x * x + (y - c) * (y - c) < tolerance) {
           return colors[2]; 
-        } else if ((x + 1) * (x + 1) + y * y < tolerance) {
+        } else if ((x + c) * (x + c) + y * y < tolerance) {
           return colors[3]; 
-        } else if (x * x + (y + 1) * (y + 1) < tolerance) {
+        } else if (x * x + (y + c) * (y + c) < tolerance) {
           return colors[4]; 
         } else {
           [x, y] = newton(x, y);
