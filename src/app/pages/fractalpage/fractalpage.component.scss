@@ -1,0 +1,73 @@
+.page-content {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.fractal-column {
+    display: flex;
+    flex-direction: column;
+
+    width: 585px;
+    height: auto;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.fractal-title {
+    display: flex;
+    width: 585px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.fractal-board {
+    display: flex;
+    width: 585px;
+    height: 477px;
+    align-items: flex-start;
+   
+
+    background-color: red;
+}
+
+.fractal-input-menu {
+    display: flex;
+    width: 585px;
+    height: 175px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px dashed rgba(120, 120, 120, 0.4);
+}
+
+.fractal-input {
+    display: flex;
+    flex-direction: column;
+    
+    width: auto;
+    height: auto;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.draw-button {
+    margin-top: 10px;
+    margin-left: 40px;
+    height: 35px;
+    min-width: 50px;
+    border-radius: 6px;
+    background: var(--gray-700, #495057);
+
+    color: var(--default-white, #FFF);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px; /* 112.5% */
+}
