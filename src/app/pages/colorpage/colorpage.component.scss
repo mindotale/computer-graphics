@@ -1,0 +1,334 @@
+.color-schemes {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .color-schemes .div {
+    background-color: #ffffff;
+    width: 1920px;
+    height: 900px;
+    position: relative;
+  }
+  
+  .color-schemes .image-container {
+    position: absolute;
+    width: 991px;
+    height: 638px;
+    top: 164px;
+    left: 860px;
+    object-fit: cover;
+  }
+  
+  .color-schemes .overlap {
+    position: absolute;
+    width: 280px;
+    height: 67px;
+    top: 314px;
+    left: 66px;
+    border-radius: 6px;
+  }
+  
+  .color-schemes .button {
+    display: flex;
+    width: 280px;
+    height: 67px;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #495057;
+    border-radius: 6px;
+    all: unset;
+    box-sizing: border-box;
+  }
+  
+  .color-schemes .button-2 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-weight: 600;
+    color: var(--defaultwhite);
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 18px;
+    white-space: nowrap;
+    all: unset;
+    box-sizing: border-box;
+  }
+  
+  
+  .color-schemes .overlap-group {
+    position: absolute;
+    width: 280px;
+    height: 67px;
+    top: 425px;
+    left: 66px;
+    border-radius: 6px;
+  }
+  
+  
+  .color-schemes .overlap-2 {
+    position: absolute;
+    width: 280px;
+    height: 67px;
+    top: 536px;
+    left: 68px;
+    border-radius: 6px;
+  }
+  
+  .color-schemes .button-wrapper {
+    display: flex;
+    width: 280px;
+    height: 67px;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #54595e;
+    border-radius: 6px;
+    all: unset;
+    box-sizing: border-box;
+  }
+  
+  .color-schemes .text-wrapper-5 {
+    position: absolute;
+    top: 23px;
+    left: 23px;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 18px;
+    white-space: nowrap;
+  }
+  
+  .color-schemes .range {
+    display: flex;
+    flex-direction: column;
+    width: 1116px;
+    align-items: flex-start;
+    padding: 8px 12px;
+    position: absolute;
+    top: 951px;
+    left: 329px;
+    border-radius: 100px;
+  }
+  
+  .color-schemes .track {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    background-color: var(--componentsrangeslider-background);
+    border-radius: 100px;
+  }
+  
+  .color-schemes .slider {
+    display: inline-flex;
+    align-items: center;
+    gap: 128px;
+    padding: 4px 0px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--componentsrangeslider-background);
+    border-radius: 100px;
+  }
+  
+  .color-schemes .left {
+    position: relative;
+    width: 1px;
+    height: 1px;
+    margin-bottom: -1px;
+  }
+  
+  .color-schemes .right {
+    position: relative;
+    width: 1px;
+    height: 1px;
+    margin-bottom: -1px;
+    margin-right: -1px;
+  }
+  
+  .color-schemes .components-handle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px;
+    position: relative;
+    top: -8px;
+    left: -8px;
+    background-color: #343a40;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  
+  .color-schemes .handle {
+    position: relative;
+    width: 1px;
+    height: 1px;
+    margin-bottom: -1px;
+    margin-right: -1px;
+    border-radius: 0;
+  }
+  
+  .custom-button     {
+    width: 200px;
+    height: 50px;
+  }
+
+  .color-schemes .display-headings {
+    position: absolute;
+    height: 87px;
+    top: 133px;
+    left: 61px;
+    font-family: var(--diplay-bold-heading-1-font-family);
+    font-weight: var(--diplay-bold-heading-1-font-weight);
+    color: var(--gray-800);
+    font-size: 70px;
+    letter-spacing: var(--diplay-bold-heading-1-letter-spacing);
+    line-height: var(--diplay-bold-heading-1-line-height);
+    font-style: var(--diplay-bold-heading-1-font-style);
+  }
+  
+  .color-schemes .p {
+    position: absolute;
+    top: 897px;
+    left: 346px;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #54595e;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: 18px;
+    white-space: nowrap;
+  }
+  
+  .color-schemes .input {
+    display: flex;
+    width: 248px;
+    align-items: flex-start;
+    position: absolute;
+    top: 314px;
+    left: 523px;
+    background-color: #ffffff;
+  }
+  
+  .color-schemes .content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+    background-color: var(--defaultwhite);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #54595e;
+  }
+  
+
+  
+  
+  
+  
+  .color-schemes .content-wrapper {
+    display: flex;
+    width: 248px;
+    align-items: flex-start;
+    position: absolute;
+    top: 394px;
+    left: 523px;
+    background-color: #ffffff;
+  }
+  
+  .color-schemes .input-3 {
+    display: flex;
+    width: 248px;
+    align-items: flex-start;
+    position: absolute;
+    top: 480px;
+    left: 523px;
+    background-color: #ffffff;
+  }
+  
+  
+  .color-schemes .input-2 {
+    display: flex;
+    width: 248px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 400px;
+    left: 523px;
+    background-color: #ffffff;
+  }
+  
+
+  .color-schemes .input-4 {
+    
+    display: flex;
+    width: 248px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 565px;
+    left: 523px;
+    background-color: #ffffff;
+  }
+
+  .custom-input {
+    display: flex;
+    flex-direction: column;
+    
+    margin-top: 10px;
+
+    width: auto;
+    height: auto;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.input-group {
+    flex-wrap: nowrap;
+}
+
+.range-title {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    color: var(--gray-800, #343A40);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.range-slider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    margin-top: 20px;
+}
+  

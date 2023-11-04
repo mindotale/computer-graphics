@@ -11,7 +11,8 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit {
   @Input() Scale: number = 0;
   @Input() C: number = 0;
 
-  constructor() {}
+  constructor() {console.log("Scale = " ,this.Scale);
+  console.log("C = " ,this.C);}
 
   ngOnInit() {
     console.log("Scale = " ,this.Scale);
@@ -45,7 +46,7 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit {
     let centerY = 0.0;
 
     p.setup = () => {
-      p.createCanvas(window.innerWidth, window.innerHeight);
+      p.createCanvas(100, 100);
       p.noLoop();
     };
 

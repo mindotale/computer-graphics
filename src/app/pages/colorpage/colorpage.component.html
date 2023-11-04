@@ -1,1 +1,73 @@
-<p>colorpage works!</p>
+
+    <div class="color-schemes">
+      <div class="div">
+        <img id="loaded-image" class="image-container" *ngIf="convImageUrl" [src]="origImageUrl" alt="Selected Image" />
+        <div class="overlap">
+            <input type="file" #fileInput style="display: none" (change)="onFileSelected($event)">
+            <button class="btn btn-secondary custom-button" (click)="fileInput.click()">
+                Load image
+            </button>
+        </div>
+        <div class="overlap-group">
+            <button class="btn btn-secondary custom-button" (click)="saveImage()">
+                Save/Export Image
+            </button>
+        </div>
+        <div class="overlap-2">
+            <button class="btn btn-secondary custom-button">
+                Show Original image
+              </button>
+        </div>
+        <div class="display-headings">Сolor schemas</div>
+        <div class="input">
+            <div class="fractal-input">
+                <div class="input-group">
+                    <span class="input-group-text">X</span>
+                    <div class="form">
+                      <input #scaleInput type="text" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="input-2">
+            <div class="fractal-input">
+                <div class="input-group">
+                    <span class="input-group-text">Y</span>
+                    <div class="form">
+                      <input #scaleInput type="text" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="input-3">
+            <div class="fractal-input">
+                <div class="input-group">
+                    <span class="input-group-text">Width</span>
+                    <div class="form">
+                      <input #scaleInput type="text" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="input-4">
+            <div class="fractal-input">
+                <div class="input-group">
+                    <span class="input-group-text">Height</span>
+                    <div class="form">
+                      <input #scaleInput type="text" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="range-title">
+        Change HSL value component of the yellow CMYK parameter
+    </div>
+
+    <div class="range-slider">
+        <input type="range" id="slider" [value]="sliderValue" (input)="onSliderChange($event)">
+        <p>Value: {{ sliderValue }}</p>
+      </div>
+

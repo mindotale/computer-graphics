@@ -24,7 +24,7 @@ export class VicsekFractalComponent implements OnInit {
 
   private sketch = (p: p5) => {
     p.setup = () => {
-      p.createCanvas(window.innerWidth, window.innerHeight);
+      p.createCanvas(100, 100);
       p.noLoop();
     };
 
