@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ElementRef, ViewChild, AfterViewInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild, AfterViewInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import * as p5 from 'p5';
 
 @Component({
@@ -6,7 +6,7 @@ import * as p5 from 'p5';
   template: '<div #newtonContainer></div>',
   styleUrls: ['./newton-fractal.component.scss']
 })
-export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('newtonContainer') newtonContainer!: ElementRef;
   @Input() scale: number = 1;
   @Input() constant: number = 1;
@@ -26,6 +26,18 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['scale'] && !changes['scale'].firstChange) {
+      this.scale = changes['scale'].currentValue;
+      this.redrawFractal();
+    }
+    
+    if (changes['constant'] && !changes['constant'].firstChange) {
+      this.constant = changes['constant'].currentValue;
+      this.redrawFractal();
+    }
+  }
+
   ngAfterViewInit() {
     this.createCanvas();
     this.handleResize();
@@ -40,6 +52,10 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy 
   private createCanvas = () => {
     const container = this.newtonContainer.nativeElement;
     this.p5Instance = new p5(this.sketch, container);
+  }
+
+  private redrawFractal() {
+    this.p5Instance.redraw();
   }
 
   private sketch = (p: p5) => {
