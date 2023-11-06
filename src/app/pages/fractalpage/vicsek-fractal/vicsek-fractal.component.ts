@@ -7,9 +7,10 @@ import * as p5 from 'p5';
   styleUrls: ['./vicsek-fractal.component.scss']
 })
 export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy {
-  private p5Instance!: p5;
-  @Input() iterations: number = 0;
   @ViewChild('vicsekContainer') vicsekContainer!: ElementRef;
+  @Input() iterations: number = 1;
+
+  private p5Instance!: p5;
 
   constructor() { }
 
@@ -32,32 +33,35 @@ export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy 
 
   private createCanvas() {
     const container = this.vicsekContainer.nativeElement;
-    this.p5Instance = new p5((p: p5) => {
-      p.setup = () => {
-        p.createCanvas(500, 500);
-        p.noLoop();
-      };
-
-      p.draw = () => {
-        p.background(255);
-        let length = p.width;
-        let startX = 0;
-        let startY = 0;
-        this.vicsek(startX, startY, length, this.iterations, p);
-      };
-    }, container);
+    this.p5Instance = new p5(this.sketch, container);
   }
 
-  private vicsek(x: number, y: number, len: number, depth: number, p: p5) {
-    if (depth === 0) {
-      p.rect(x, y, len, len);
-    } else {
-      let newLen = len / 3;
-      this.vicsek(x, y, newLen, depth - 1, p);
-      this.vicsek(x + newLen * 2, y, newLen, depth - 1, p);
-      this.vicsek(x, y + newLen * 2, newLen, depth - 1, p);
-      this.vicsek(x + newLen, y + newLen, newLen, depth - 1, p);
-      this.vicsek(x + newLen * 2, y + newLen * 2, newLen, depth - 1, p);
+  private sketch = (p: p5) => {
+    p.setup = () => {
+      const container = this.vicsekContainer.nativeElement;
+      p.createCanvas(container.offsetWidth, container.offsetWidth);
+      p.noLoop();
+    };
+
+    p.draw = () => {
+      p.background(255);
+      let length = p.width;
+      let startX = 0;
+      let startY = 0;
+      vicsek(startX, startY, length, this.iterations);
+    };
+
+    const vicsek = (x: number, y: number, len: number, depth: number) => {
+      if (depth === 0) {
+        p.rect(x, y, len, len);
+      } else {
+        let newLen = len / 3;
+        vicsek(x, y, newLen, depth - 1);
+        vicsek(x + newLen * 2, y, newLen, depth - 1);
+        vicsek(x, y + newLen * 2, newLen, depth - 1);
+        vicsek(x + newLen, y + newLen, newLen, depth - 1);
+        vicsek(x + newLen * 2, y + newLen * 2, newLen, depth - 1);
+      }
     }
   }
 
@@ -65,7 +69,7 @@ export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy 
   private handleResize() {
     if (this.p5Instance) {
       const container = this.vicsekContainer.nativeElement;
-      this.p5Instance.resizeCanvas(500, 500);
+      this.p5Instance.resizeCanvas(container.offsetWidth, container.offsetWidth);
     }
   }
 }
