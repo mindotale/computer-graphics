@@ -27,19 +27,25 @@ export class FractalpageComponent {
     }
   }
 
-  drawNewton(scaleValue: string, cValue: string): void {
-    this.scale = parseInt(scaleValue, 10);
-    this.c = parseInt(cValue, 10);
+  drawNewton(scaleValue: string, cValue: string, color1: string, color2: string, color3: string, color4: string, color5: string): void {
+    this.scale = parseFloat(scaleValue);
+    this.c = parseFloat(cValue);
 
-    console.log("scale=", this.scale);
-    console.log("c=", this.c);
-    
+    let newColors = [
+      '#' + color1,
+      '#' + color2,
+      '#' + color3,
+      '#' + color4,
+      '#' + color5
+    ]
+
+    this.colors = newColors;
+
     if (!isNaN( this.scale)) {
     } else {
       console.error('Invalid Scale Value');
     }
 
-    this.c = parseInt(cValue, 10);
     if (!isNaN( this.c)) {
     } else {
       console.error('Invalid C Value');

@@ -49,6 +49,12 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy,
       this.colorPalette = this.colors.map(color => this.p5Instance.color(color));
       this.redrawFractal();
     }
+    console.log("1=", this.colors[0]);
+    console.log("2=", this.colors[1]);
+    console.log("3=", this.colors[2]);
+    console.log("4=", this.colors[3]);
+    console.log("5=", this.colors[4]);
+
   }
 
   ngAfterViewInit() {

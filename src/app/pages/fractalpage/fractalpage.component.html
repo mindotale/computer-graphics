@@ -19,7 +19,7 @@
     <div class="fractal-column">
         <div class="fractal-title">Newton Fractal</div>
         <div class="fractal-board">
-            <newton-fractal [scale]="scale" [constant]="c" [colors]="['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00']"></newton-fractal>
+            <newton-fractal [scale]="scale" [constant]="c" [colors]="colors"></newton-fractal>
         </div>
         <div class="fractal-input-menu">
             <div class="fractal-input">
@@ -30,30 +30,45 @@
                     </div>
                 </div>
             </div>
-            <div class="fractal-color-menu">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
+            <div class="fractal-input">
+                <div class="input-group">
+                    <span class="input-group-text">#</span>
+                    <div class="form">
+                      <input #color1 type="text" class="form-control" required minlength="6" maxlength="6">
+                    </div>
+                </div>
             </div>
-            <div class="fractal-color-menu">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
+            <div class="fractal-input">
+                <div class="input-group">
+                    <span class="input-group-text">#</span>
+                    <div class="form">
+                      <input #color2 type="text" class="form-control" required minlength="6" maxlength="6">
+                    </div>
+                </div>
             </div>
-            <div class="fractal-color-menu">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
+            <div class="fractal-input">
+                <div class="input-group">
+                    <span class="input-group-text">#</span>
+                    <div class="form">
+                      <input #color3 type="text" class="form-control" required minlength="6" maxlength="6">
+                    </div>
+                </div>
             </div>
-            <div class="fractal-color-menu">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
+            <div class="fractal-input">
+                <div class="input-group">
+                    <span class="input-group-text">#</span>
+                    <div class="form">
+                      <input #color4 type="text" class="form-control" required minlength="6" maxlength="6">
+                    </div>
+                </div>
             </div>
-            <div class="fractal-color-menu">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
-                <input class="fractal-color-input">
+            <div class="fractal-input">
+                <div class="input-group">
+                    <span class="input-group-text">#</span>
+                    <div class="form">
+                      <input #color5 type="text" class="form-control" required minlength="6" maxlength="6">
+                    </div>
+                </div>
             </div>
 
             <div class="fractal-input">
@@ -64,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-secondary draw-button" (click)="drawNewton(scaleInput.value,cInput.value)">Draw</button>
+            <button type="button" class="btn btn-secondary draw-button" (click)="drawNewton(scaleInput.value,cInput.value, color1.value, color2.value, color3.value, color4.value, color5.value)">Draw</button>
  
         </div>
     </div>
