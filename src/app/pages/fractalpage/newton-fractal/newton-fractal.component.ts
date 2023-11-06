@@ -1,31 +1,36 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild, AfterViewInit, Input, OnDestroy } from '@angular/core';
 import * as p5 from 'p5';
 
 @Component({
   selector: 'newton-fractal',
-  templateUrl: './newton-fractal.component.html',
+  template: '<div #newtonContainer></div>',
   styleUrls: ['./newton-fractal.component.scss']
 })
-export class NewtonFractalComponent implements OnInit, AfterViewInit {
-  private p5!: p5;
+export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy {
+  private p5Instance!: p5;
   @Input() Scale: number = 0;
   @Input() C: number = 0;
+  @ViewChild('newtonContainer') newtonContainer!: ElementRef;
 
-  constructor() {console.log("Scale = " ,this.Scale);
-  console.log("C = " ,this.C);}
 
-  ngOnInit() {
-    console.log("Scale = " ,this.Scale);
-    console.log("C = " ,this.C);
-  }
+  constructor() {};
+
+  ngOnInit() { }
 
   ngAfterViewInit() {
     this.createCanvas();
     this.handleResize();
   }
 
+  ngOnDestroy() {
+    if (this.p5Instance) {
+      this.p5Instance.remove();
+    }
+  }
+
   private createCanvas() {
-    this.p5 = new p5(this.sketch);
+    const container = this.newtonContainer.nativeElement;
+    this.p5Instance = new p5(this.sketch, container);
   }
 
   private sketch(p: p5) {
@@ -46,7 +51,7 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit {
     let centerY = 0.0;
 
     p.setup = () => {
-      p.createCanvas(100, 100);
+      p.createCanvas(500, 500);
       p.noLoop();
     };
 
@@ -98,9 +103,11 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit {
     }
   }
 
+  @HostListener('window:resize')
   private handleResize() {
-    window.addEventListener('resize', () => {
-      this.p5.resizeCanvas(window.innerWidth, window.innerHeight);
-    });
+    if (this.p5Instance) {
+      const container = this.newtonContainer.nativeElement;
+      this.p5Instance.resizeCanvas(500, 500);
+    }
   }
 }

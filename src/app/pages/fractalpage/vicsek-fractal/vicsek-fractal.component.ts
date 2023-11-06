@@ -14,7 +14,6 @@ export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy 
   constructor() { }
 
   ngOnInit() {
-    // Validate the input for iterations
     if (this.iterations < 0) {
       this.iterations = 0;
     }
@@ -35,7 +34,7 @@ export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy 
     const container = this.vicsekContainer.nativeElement;
     this.p5Instance = new p5((p: p5) => {
       p.setup = () => {
-        p.createCanvas(container.offsetWidth, container.offsetHeight);
+        p.createCanvas(500, 500);
         p.noLoop();
       };
 
@@ -66,7 +65,7 @@ export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy 
   private handleResize() {
     if (this.p5Instance) {
       const container = this.vicsekContainer.nativeElement;
-      this.p5Instance.resizeCanvas(container.offsetWidth, container.offsetHeight);
+      this.p5Instance.resizeCanvas(500, 500);
     }
   }
 }
