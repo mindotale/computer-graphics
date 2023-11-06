@@ -10,6 +10,13 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy,
   @ViewChild('newtonContainer') newtonContainer!: ElementRef;
   @Input() scale: number = 1;
   @Input() constant: number = 1;
+  @Input() colors: string[] = [
+    '#000000',
+    '#FF0000',
+    '#00FF00',
+    '#0000FF',
+    '#FFFF00' 
+  ];
 
   private p5Instance!: p5;
   private tolerance = 0.001;
@@ -17,6 +24,7 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy,
   private maxIterations = 100;
   private centerX = 0.0;
   private centerY = 0.0;
+  private colorPalette: p5.Color[] = [];
 
   constructor() {};
 
@@ -34,6 +42,11 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy,
     
     if (changes['constant'] && !changes['constant'].firstChange) {
       this.constant = changes['constant'].currentValue;
+      this.redrawFractal();
+    }
+
+    if (changes['colors'] && !changes['colors'].firstChange) {
+      this.colorPalette = this.colors.map(color => this.p5Instance.color(color));
       this.redrawFractal();
     }
   }
@@ -59,15 +72,8 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy,
   }
 
   private sketch = (p: p5) => {
-    const colors = [
-      p.color(0, 0, 0),    
-      p.color(255, 0, 0),  
-      p.color(0, 255, 0),  
-      p.color(0, 0, 255),  
-      p.color(255, 255, 0),
-    ];
-    
     p.setup = () => {
+      this.colorPalette = this.colors.map(color => p.color(color));
       const container = this.newtonContainer.nativeElement;
       p.createCanvas(container.offsetWidth, container.offsetWidth);
       p.noLoop();
@@ -103,21 +109,21 @@ export class NewtonFractalComponent implements OnInit, AfterViewInit, OnDestroy,
       let iterations = 0;
       while (iterations < this.maxIterations) {
         if (x * x + y * y < this.zeroTolerance) {
-          return colors[0]; 
+          return this.colorPalette[0]; 
         } else if ((x - this.constant) * (x - this.constant) + y * y < this.tolerance) {
-          return colors[1]; 
+          return this.colorPalette[1]; 
         } else if (x * x + (y - this.constant) * (y - this.constant) < this.tolerance) {
-          return colors[2]; 
+          return this.colorPalette[2]; 
         } else if ((x + this.constant) * (x + this.constant) + y * y < this.tolerance) {
-          return colors[3]; 
+          return this.colorPalette[3]; 
         } else if (x * x + (y + this.constant) * (y + this.constant) < this.tolerance) {
-          return colors[4]; 
+          return this.colorPalette[4]; 
         } else {
           [x, y] = newton(x, y);
           iterations++;
         }
       }
-      return colors[0];
+      return this.colorPalette[0];
     }
   }
 
