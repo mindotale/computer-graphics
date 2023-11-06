@@ -11,6 +11,13 @@ export class FractalpageComponent {
 
   scale: number = 1;
   c: number = 1;
+  colors: string[] = [
+    '#000000',
+    '#FF0000',
+    '#00FF00',
+    '#0000FF',
+    '#FFFF00' 
+  ];
 
   drawFractal(iterationValue: string): void {
     this.iteration = parseInt(iterationValue, 10);
@@ -26,7 +33,7 @@ export class FractalpageComponent {
 
     console.log("scale=", this.scale);
     console.log("c=", this.c);
-
+    
     if (!isNaN( this.scale)) {
     } else {
       console.error('Invalid Scale Value');
