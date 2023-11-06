@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, HostListener, Input, ElementRef, ViewChild, AfterViewInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import * as p5 from 'p5';
 
 @Component({
@@ -6,7 +6,7 @@ import * as p5 from 'p5';
   template: '<div #vicsekContainer></div>',
   styleUrls: ['./vicsek-fractal.component.scss']
 })
-export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy {
+export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('vicsekContainer') vicsekContainer!: ElementRef;
   @Input() iterations: number = 1;
 
@@ -17,6 +17,13 @@ export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnInit() {
     if (this.iterations < 0) {
       this.iterations = 0;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['iterations'] && !changes['iterations'].firstChange) {
+      this.iterations = changes['iterations'].currentValue;
+      this.redrawFractal();
     }
   }
 
@@ -34,6 +41,10 @@ export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy 
   private createCanvas() {
     const container = this.vicsekContainer.nativeElement;
     this.p5Instance = new p5(this.sketch, container);
+  }
+
+  private redrawFractal() {
+    this.p5Instance.redraw();
   }
 
   private sketch = (p: p5) => {
