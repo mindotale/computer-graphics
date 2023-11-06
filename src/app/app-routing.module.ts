@@ -7,8 +7,6 @@ import { ColorpageComponent } from './pages/colorpage/colorpage.component';
 import { AboutpageComponent } from './pages/aboutpage/aboutpage.component';
 import { LearnpageComponent } from './pages/learnpage/learnpage.component';
 import { FigurespageComponent } from './pages/figurespage/figurespage.component';
-import { VicsekFractalComponent } from './pages/fractalpage/vicsek-fractal/vicsek-fractal.component';
-import { NewtonFractalComponent } from './pages/fractalpage/newton-fractal/newton-fractal.component';
 
 const routes: Routes = [
   { path: 'mainpage', component: MainpageComponent },
@@ -17,8 +15,6 @@ const routes: Routes = [
   { path: 'figure-transformation', component: FigurespageComponent},
   { path: 'about-us', component: AboutpageComponent},
   { path: 'learn-more', component: LearnpageComponent},
-  { path: 'vicsek-fractal', component: VicsekFractalComponent},
-  { path: 'newton-fractal', component: NewtonFractalComponent},
   { path: '', redirectTo: '/mainpage', pathMatch: 'full' }, // Redirect to Page 1 on initial load
 ];
 

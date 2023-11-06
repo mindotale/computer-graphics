@@ -1,30 +1,56 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';import * as p5 from 'p5';
+import { Component, OnInit, HostListener, Input, ElementRef, ViewChild, AfterViewInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import * as p5 from 'p5';
 
 @Component({
   selector: 'vicsek-fractal',
-  template: '',
+  template: '<div #vicsekContainer></div>',
   styleUrls: ['./vicsek-fractal.component.scss']
 })
-export class VicsekFractalComponent implements OnInit {
-  private p5!: p5;
-  @Input() iterations: number = 0; 
-  
-  constructor() {  }
+export class VicsekFractalComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+  @ViewChild('vicsekContainer') vicsekContainer!: ElementRef;
+  @Input() iterations: number = 1;
 
-  ngOnInit() {  }
+  private p5Instance!: p5;
+
+  constructor() { }
+
+  ngOnInit() {
+    if (this.iterations < 0) {
+      this.iterations = 0;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['iterations'] && !changes['iterations'].firstChange) {
+      this.iterations = changes['iterations'].currentValue;
+      this.redrawFractal();
+    }
+  }
 
   ngAfterViewInit() {
     this.createCanvas();
     this.handleResize();
   }
 
+  ngOnDestroy() {
+    if (this.p5Instance) {
+      this.p5Instance.remove();
+    }
+  }
+
   private createCanvas() {
-    this.p5 = new p5(this.sketch);
+    const container = this.vicsekContainer.nativeElement;
+    this.p5Instance = new p5(this.sketch, container);
+  }
+
+  private redrawFractal() {
+    this.p5Instance.redraw();
   }
 
   private sketch = (p: p5) => {
     p.setup = () => {
-      p.createCanvas(100, 100);
+      const container = this.vicsekContainer.nativeElement;
+      p.createCanvas(container.offsetWidth, container.offsetWidth);
       p.noLoop();
     };
 
@@ -33,26 +59,28 @@ export class VicsekFractalComponent implements OnInit {
       let length = p.width;
       let startX = 0;
       let startY = 0;
-      this.vicsek(startX, startY, length, this.iterations); // Use this.iterations
+      vicsek(startX, startY, length, this.iterations);
     };
-  };
 
-  private vicsek(x: number, y: number, len: number, depth: number) {
-    if (depth === 0) {
-      this.p5.rect(x, y, len, len);
-    } else {
-      let newLen = len / 3;
-      this.vicsek(x, y, newLen, depth - 1);
-      this.vicsek(x + newLen * 2, y, newLen, depth - 1);
-      this.vicsek(x, y + newLen * 2, newLen, depth - 1);
-      this.vicsek(x + newLen, y + newLen, newLen, depth - 1);
-      this.vicsek(x + newLen * 2, y + newLen * 2, newLen, depth - 1);
+    const vicsek = (x: number, y: number, len: number, depth: number) => {
+      if (depth === 0) {
+        p.rect(x, y, len, len);
+      } else {
+        let newLen = len / 3;
+        vicsek(x, y, newLen, depth - 1);
+        vicsek(x + newLen * 2, y, newLen, depth - 1);
+        vicsek(x, y + newLen * 2, newLen, depth - 1);
+        vicsek(x + newLen, y + newLen, newLen, depth - 1);
+        vicsek(x + newLen * 2, y + newLen * 2, newLen, depth - 1);
+      }
     }
   }
 
+  @HostListener('window:resize')
   private handleResize() {
-    window.addEventListener('resize', () => {
-      this.p5.resizeCanvas(window.innerWidth, window.innerHeight);
-    });
+    if (this.p5Instance) {
+      const container = this.vicsekContainer.nativeElement;
+      this.p5Instance.resizeCanvas(container.offsetWidth, container.offsetWidth);
+    }
   }
 }
