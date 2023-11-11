@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import * as chroma from 'chroma-js';
 
 @Component({
   selector: 'app-colorpage',
@@ -6,41 +7,47 @@ import { Component } from '@angular/core';
   styleUrls: ['./colorpage.component.scss']
 })
 export class ColorpageComponent {
-  origImageUrl: string | ArrayBuffer | null = null;
-  convImageUrl: string | ArrayBuffer | null = null;
+  origImageUrl: string = "";
+  convImageUrl: string = "";
   sliderValue: number = 50; // Initialize with a default value
+  @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
 
-  onSliderChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.sliderValue = parseInt(target.value, 10);
-    console.log('Slider value changed:', this.sliderValue);
-    // You can perform any actions based on the slider value here
+
+  openFileExplorer() {
+    this.fileInput.nativeElement.click();
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
+  handleFileInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const files = inputElement.files;
 
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-
-      reader.onload = (e) => {
-        this.origImageUrl = reader.result;
-        this.convImageUrl = reader.result;
-
-      };
+    if (files && files.length > 0) {
+      const selectedFile = files[0];
+      this.loadImageAndDraw(selectedFile);
     }
-    const image = document.getElementById('loadedImage');
-
-    if(image == null)
-      return;
-
-    const imageContainer = document.querySelector('.image-container');
-    image.style.width = imageContainer?.clientWidth + 'px';
-    image.style.height = imageContainer?.clientHeight + 'px';
-
-
   }
+
+  loadImageAndDraw(file: File) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => this.drawOnCanvas(img);
+      img.src = event.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  drawOnCanvas(image: HTMLImageElement) {
+    const canvas = this.canvas.nativeElement;
+    const ctx = canvas.getContext('2d');
+    canvas.width = image.width;
+    canvas.height = image.height;
+    ctx?.drawImage(image, 0, 0);
+  }
+
+
+ 
 
   saveImage() {
     if (this.convImageUrl) {
@@ -53,11 +60,64 @@ export class ColorpageComponent {
     }
   }
 
-  // Function to trigger file input click when the button is clicked
-  selectImage() {
-    const fileInput = document.getElementById('fileInput');
-    if (fileInput) {
-      fileInput.click();
-    }
+  onChangeSaturationAndValue() {
+  
   }
+
+  onSliderChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.sliderValue = parseInt(target.value, 10);
+    console.log('Slider value changed:', this.sliderValue);
+    const ctx = this.canvas.nativeElement.getContext('2d');
+
+    const imageData = ctx?.getImageData(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+    if(imageData == undefined)
+    {
+      console.log("tilt");
+      return;
+    }
+    const data = imageData.data;
+    
+    // Adjust the saturation and value of yellow pixels
+    for (let i = 0; i < data.length; i += 4) {
+      
+      const [r, g, b] = [data[i], data[i + 1], data[i + 2]];
+      const hslValues = chroma(r, g, b).hsl();
+      //console.log("r = ",r," g = ", g, " b = ", b);
+      
+      // Check if the pixel is yellow (you may need to adjust these thresholds)
+      if (hslValues[0] > 30 && hslValues[0] < 90) {
+       // const hslValues = chroma(r, g, b).hsl();
+        //console.log(hslValues)
+        hslValues[1] = this.sliderValue/100;
+        hslValues[2] = this.sliderValue/100;
+
+        const rgbValues = chroma(hslValues[0], hslValues[1], hslValues[2], 'hsl').rgb();
+
+
+
+        // console.log('yellow pixel here!')
+        // const hexColor = chroma.rgb(r, g, b).hex();
+        // console.log('dsffdsdfssfdsfd!')
+        // // Adjust saturation and value
+        // const modifiedColor = chroma(hexColor).saturate(100).luminance(1.1);
+        // console.log("r = ",r," g = ", g, " b = ", b);
+        // // Update the pixel
+        // const rgbValues = chroma(modifiedColor).rgb();
+        // console.log("r = ",rgbValues[0]," g = ", rgbValues[1], " b = ", rgbValues[2]);
+        // data[i] = rgbValues[0];
+        // data[i + 1] = rgbValues[1];
+        // data[i + 2] = rgbValues[2];
+
+         data[i] = rgbValues[0]; 
+         data[i+1] = rgbValues[1]; 
+         data[i+2] = rgbValues[2]; 
+      }
+    }
+
+    // Put the modified data back to the canvas
+    ctx?.putImageData(imageData, 0, 0);
+  }
+
+
 }

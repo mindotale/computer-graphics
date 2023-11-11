@@ -1,10 +1,10 @@
 
     <div class="color-schemes">
       <div class="div">
-        <img id="loaded-image" class="image-container" *ngIf="convImageUrl" [src]="origImageUrl" alt="Selected Image" />
+        <canvas #canvas class="image-container"></canvas>
         <div class="overlap">
-            <input type="file" #fileInput style="display: none" (change)="onFileSelected($event)">
-            <button class="btn btn-secondary custom-button" (click)="fileInput.click()">
+            <input type="file" #fileInput style="display: none" (change)="handleFileInput($event)" accept="image/*">
+            <button class="btn btn-secondary custom-button" (click)="openFileExplorer()">
                 Load image
             </button>
         </div>
@@ -13,7 +13,7 @@
                 Save/Export Image
             </button>
         </div>
-        <div class="overlap-2">
+        <div class="overlap-2" (click)="onChangeSaturationAndValue()">
             <button class="btn btn-secondary custom-button">
                 Show Original image
               </button>
@@ -67,7 +67,7 @@
     </div>
 
     <div class="range-slider">
-        <input type="range" id="slider" [value]="sliderValue" (input)="onSliderChange($event)">
+        <input type="range" id="slider" min="20" max="80" [value]="sliderValue" (input)="onSliderChange($event)">
         <p>Value: {{ sliderValue }}</p>
       </div>
 
