@@ -84,13 +84,19 @@ export class GraphComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
   private drawAxes(p: p5) {
     const centerX = p.width / 2;
     const centerY = p.height / 2;
-
-    // Draw X-axis
+  
+    // Draw X-axis arrow
     p.stroke(0);
-    p.line(0, centerY, p.width, centerY);
-
-    // Draw Y-axis
-    p.line(centerX, 0, centerX, p.height);
+    p.line(0, centerY, p.width - 10, centerY); // X-axis line
+    p.line(p.width - 10, centerY, p.width - 20, centerY - 5); // Arrowhead part 1
+    p.line(p.width - 10, centerY, p.width - 20, centerY + 5); // Arrowhead part 2
+    p.text('X', p.width - 20, centerY - 20);
+  
+    // Draw Y-axis arrow
+    p.line(centerX, p.height, centerX, 10); // Y-axis line
+    p.line(centerX, 10, centerX - 5, 20); // Arrowhead part 1
+    p.line(centerX, 10, centerX + 5, 20); // Arrowhead part 2
+    p.text('Y', centerX - 20, 20);
   }
 
   private drawPoints(p: p5, ...points: Point[]) {
