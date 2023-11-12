@@ -87,6 +87,7 @@ export class GraphComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
   
     // Draw X-axis arrow
     p.stroke(0);
+    p.strokeWeight(1);
     p.line(0, centerY, p.width - 10, centerY); // X-axis line
     p.line(p.width - 10, centerY, p.width - 20, centerY - 5); // Arrowhead part 1
     p.line(p.width - 10, centerY, p.width - 20, centerY + 5); // Arrowhead part 2
@@ -97,6 +98,20 @@ export class GraphComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
     p.line(centerX, 10, centerX - 5, 20); // Arrowhead part 1
     p.line(centerX, 10, centerX + 5, 20); // Arrowhead part 2
     p.text('Y', centerX - 20, 20);
+  
+    // Draw ticks and labels along the X-axis
+    for (let i = -p.width / 2; i <= p.width / 2; i += p.width / 10) {
+      const roundedLabel = i.toFixed(2); // Round to 2 decimal places
+      p.line(centerX + i, centerY - 5, centerX + i, centerY + 5); // Tick
+      p.text(roundedLabel, centerX + i - 20, centerY + 20); // Label
+    }
+  
+    // Draw ticks and labels along the Y-axis
+    for (let i = -p.height / 2; i <= p.height / 2; i += p.height / 10) {
+      const roundedLabel = i.toFixed(2); // Round to 2 decimal places
+      p.line(centerX - 5, centerY - i, centerX + 5, centerY - i); // Tick
+      p.text(roundedLabel, centerX - 40 , centerY - i - 5); // Label
+    }
   }
 
   private drawPoints(p: p5, ...points: Point[]) {
