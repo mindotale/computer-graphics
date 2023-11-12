@@ -36,8 +36,10 @@ export class GraphComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.calculateFourthPoint();
-    this.p5Instance.redraw();
+    if ('p1' in changes || 'p2' in changes || 'p3' in changes || 'a' in changes || 'b' in changes) {
+      this.calculateFourthPoint();
+      this.p5Instance.redraw();
+    }
   }
 
   ngOnDestroy() {
