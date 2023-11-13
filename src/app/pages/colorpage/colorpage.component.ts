@@ -54,16 +54,21 @@ export class ColorpageComponent {
       var y = event.clientY - canvas.getBoundingClientRect().top;
 
       // Get the pixel data at the clicked coordinates
-      var context = canvas.getContext("2d");
       var pixelData = ctx?.getImageData(x, y, 1, 1).data;
       if(pixelData == undefined)
       {
         console.log("tilt");
         return;
       }
+      const [r, g, b] = [pixelData[0], pixelData[1], pixelData[2]];
+      console.log([r, g, b]);
+      const hslValues = chroma(r, g, b).hsl();
+      const cmykColor = chroma(r, g, b).cmyk();
+    
+      console.log(hslValues);
+      console.log(cmykColor);
       // Log the coordinates and pixel color information to the console
-      console.log("Clicked at coordinates (x, y):", x, y);
-      console.log("Pixel color (R, G, B, A):", pixelData[0], pixelData[1], pixelData[2], pixelData[3]);
+     
   });
     ctx?.drawImage(image, 0, 0);
   }
