@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import * as chroma from 'chroma-js';
 
 @Component({
@@ -6,12 +6,18 @@ import * as chroma from 'chroma-js';
   templateUrl: './colorpage.component.html',
   styleUrls: ['./colorpage.component.scss']
 })
-export class ColorpageComponent {
+export class ColorpageComponent implements OnInit {
   origImageUrl: string = "";
   sliderValue: number = 50; // Initialize with a default value
+  hslInputValue: string = ""; // Add this property
+  cmykInputValue: string = ""; // Add this property
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
 
+  ngOnInit () {
+    this.hslInputValue = "HSL";
+    this.cmykInputValue = "CMYK";
+  }
 
   openFileExplorer() {
     this.fileInput.nativeElement.click();

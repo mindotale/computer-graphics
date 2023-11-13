@@ -64,7 +64,7 @@
                 <div class="input-group">
                     <span class="input-group-text">HSL</span>
                     <div class="form">
-                      <input #scaleInput type="text" class="form-control" required>
+                        <input [(ngModel)]="hslInputValue" #hslInput type="text" class="form-control" required>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 <div class="input-group">
                     <span class="input-group-text">CMYK</span>
                     <div class="form">
-                      <input #scaleInput type="text" class="form-control" required>
+                        <input [(ngModel)]="cmykInputValue" #cmykInput type="text" class="form-control" required>
                     </div>
                 </div>
             </div>
