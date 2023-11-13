@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input, AfterViewInit, OnDestroy, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import * as p5 from 'p5';
 
-interface Point {
+export interface Point {
   x: number;
   y: number;
 }
@@ -13,7 +13,7 @@ interface Point {
 })
 export class GraphComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @ViewChild('graphContainer') graphContainer!: ElementRef;
-
+ 
   @Input() p1: Point = { x: 0, y: 0 };
   @Input() p2: Point = { x: 0, y: 0 };
   @Input() p3: Point = { x: 0, y: 0 };
