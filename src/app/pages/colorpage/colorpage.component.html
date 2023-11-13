@@ -1,7 +1,7 @@
 
     <div class="color-schemes">
       <div class="div">
-        <canvas #canvas class="image-container"></canvas>
+        <canvas #canvas class="image-container" (click) = "getPixelData()"></canvas>
         <div class="overlap">
             <input type="file" #fileInput style="display: none" (change)="handleFileInput($event)" accept="image/*">
             <button class="btn btn-secondary custom-button" (click)="openFileExplorer()">
@@ -24,17 +24,17 @@
                 <div class="input-group">
                     <span class="input-group-text">X</span>
                     <div class="form">
-                      <input #scaleInput type="text" class="form-control" required>
+                      <input #xInput type="text" class="form-control" required>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  
         <div class="input-2">
             <div class="fractal-input">
                 <div class="input-group">
                     <span class="input-group-text">Y</span>
                     <div class="form">
-                      <input #scaleInput type="text" class="form-control" required>
+                      <input #yInput type="text" class="form-control" required>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <div class="input-group">
                     <span class="input-group-text">Width</span>
                     <div class="form">
-                      <input #scaleInput type="text" class="form-control" required>
+                      <input #widthInput type="text" class="form-control" required>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <div class="input-group">
                     <span class="input-group-text">Height</span>
                     <div class="form">
-                      <input #scaleInput type="text" class="form-control" required>
+                      <input #heightInput type="text" class="form-control" required>
                     </div>
                 </div>
             </div>
@@ -87,6 +87,6 @@
     </div>
 
     <div class="range-slider">
-        <input class="w-50" type="range" id="slider" min="20" max="80" [value]="sliderValue" (input)="onSliderChange($event)">
+        <input class="w-50" type="range" id="slider" min="20" max="80" [value]="sliderValue" (input)="onSliderChange($event, xInput.value,yInput.value,widthInput.value,heightInput.value)">
     </div>
 

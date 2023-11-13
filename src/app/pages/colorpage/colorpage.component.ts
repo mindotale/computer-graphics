@@ -14,10 +14,17 @@ export class ColorpageComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
 
+<<<<<<< HEAD
   ngOnInit () {
     this.hslInputValue = "HSL";
     this.cmykInputValue = "CMYK";
   }
+=======
+  x: number = 0;
+  y: number = 0;
+  width: number = 100;
+  height: number = 100;
+>>>>>>> 9c37d783d4130db4dc079377c38f808dfafb22f5
 
   openFileExplorer() {
     this.fileInput.nativeElement.click();
@@ -40,6 +47,7 @@ export class ColorpageComponent implements OnInit {
       img.onload = () => this.drawOnCanvas(img);
       img.src = event.target?.result as string;
       this.origImageUrl = event.target?.result as string;
+      
     };
     reader.readAsDataURL(file);
   }
@@ -49,6 +57,28 @@ export class ColorpageComponent implements OnInit {
     const ctx = canvas.getContext('2d');
     canvas.width = image.width;
     canvas.height = image.height;
+    canvas.addEventListener("click", function (event) {
+      // Get the click coordinates relative to the canvas
+      var x = event.clientX - canvas.getBoundingClientRect().left;
+      var y = event.clientY - canvas.getBoundingClientRect().top;
+
+      // Get the pixel data at the clicked coordinates
+      var pixelData = ctx?.getImageData(x, y, 1, 1).data;
+      if(pixelData == undefined)
+      {
+        console.log("tilt");
+        return;
+      }
+      const [r, g, b] = [pixelData[0], pixelData[1], pixelData[2]];
+      console.log([r, g, b]);
+      const hslValues = chroma(r, g, b).hsl();
+      const cmykColor = chroma(r, g, b).cmyk();
+    
+      console.log(hslValues);
+      console.log(cmykColor);
+      // Log the coordinates and pixel color information to the console
+     
+  });
     ctx?.drawImage(image, 0, 0);
   }
 
@@ -73,38 +103,53 @@ export class ColorpageComponent implements OnInit {
     ctx?.drawImage(image, 0, 0);
   }
 
-  onSliderChange(event: Event) {
+  onSliderChange(event: Event, xInput: string, yInput: string, widthInput: string, heightInput: string) {
+    this.x = parseInt(xInput);
+    this.y = parseInt(yInput);
+    this.width = parseInt(widthInput);
+    this.height = parseInt(heightInput);
+
     const target = event.target as HTMLInputElement;
     this.sliderValue = parseInt(target.value, 10);
     const ctx = this.canvas.nativeElement.getContext('2d');
 
     const imageData = ctx?.getImageData(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
     if(imageData == undefined)
-    {
-      console.log("tilt");
       return;
-    }
+
     const data = imageData.data;
-    
+
+
     for (let i = 0; i < data.length; i += 4) {
-      
+      // Extract the pixel coordinates from the loop index
+      const pixelX = (i / 4) % imageData.width;
+      const pixelY = Math.floor((i / 4) / imageData.width);
+
+      // Check if the pixel is outside the specified rectangle
+      if (pixelX < this.x  || pixelX >= this.x + this.width || pixelY < this.y || pixelY >= this.y + this.height) {
+        continue; // Ignore pixels outside the rectangle
+      }
+
       const [r, g, b] = [data[i], data[i + 1], data[i + 2]];
       const hslValues = chroma(r, g, b).hsl();
 
       if (hslValues[0] > 30 && hslValues[0] < 90) {
-        hslValues[1] = this.sliderValue/100;
-        hslValues[2] = this.sliderValue/100;
+        hslValues[1] = this.sliderValue / 100;
+        hslValues[2] = this.sliderValue / 100;
 
         const rgbValues = chroma(hslValues[0], hslValues[1], hslValues[2], 'hsl').rgb();
 
-        data[i] = rgbValues[0]; 
-        data[i+1] = rgbValues[1]; 
-        data[i+2] = rgbValues[2]; 
+        data[i] = rgbValues[0];
+        data[i + 1] = rgbValues[1];
+        data[i + 2] = rgbValues[2];
       }
     }
 
     ctx?.putImageData(imageData, 0, 0);
   }
 
+  getPixelData(){
+    
+  }
 
 }
