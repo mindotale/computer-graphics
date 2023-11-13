@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // Add this line
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { LearnpageComponent } from './pages/learnpage/learnpage.component';
 import { FigurespageComponent } from './pages/figurespage/figurespage.component';
 import { VicsekFractalComponent } from './pages/fractalpage/vicsek-fractal/vicsek-fractal.component';
 import { NewtonFractalComponent } from './pages/fractalpage/newton-fractal/newton-fractal.component';
+import { GraphComponent } from './pages/figurespage/graph/graph.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +26,13 @@ import { NewtonFractalComponent } from './pages/fractalpage/newton-fractal/newto
     LearnpageComponent,
     FigurespageComponent,
     VicsekFractalComponent,
-    NewtonFractalComponent
+    NewtonFractalComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
