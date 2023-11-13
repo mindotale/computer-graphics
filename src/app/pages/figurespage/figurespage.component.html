@@ -1,32 +1,55 @@
 <!-- figurespage.component.html -->
 
-<div class="page-content">
-    <div class="sidebar">
-        <!-- Controls for parameters -->
-        <label>X1:</label>
-        <input [(ngModel)]="p1.x" type="number" />
-        <label>Y1:</label>
-        <input [(ngModel)]="p1.y" type="number" />
-
-        <label>X2:</label>
-        <input [(ngModel)]="p2.x" type="number" />
-        <label>Y2:</label>
-        <input [(ngModel)]="p2.y" type="number" />
-
-        <label>X3:</label>
-        <input [(ngModel)]="p3.x" type="number" />
-        <label>Y3:</label>
-        <input [(ngModel)]="p3.y" type="number" />
-
-        <label>A:</label>
-        <input [(ngModel)]="a" type="number" />
-
-        <label>B:</label>
-        <input [(ngModel)]="b" type="number" />
+<div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar with controls for parameters -->
+      <div class="col-md-4">
+        <div class="sidebar">
+            <form #parametersForm="ngForm">
+                <div class="form-group">
+                  <label for="point1" class="point-label">Point 1:</label>
+                  <div class="point-inputs">
+                    <input [(ngModel)]="p1.x" name="point1X" type="number" class="form-control" id="x1" placeholder="X" />
+                    <input [(ngModel)]="p1.y" name="point1Y" type="number" class="form-control" id="y1" placeholder="Y" />
+                  </div>
+                </div>
+              
+                <div class="form-group">
+                  <label for="point2" class="point-label">Point 2:</label>
+                  <div class="point-inputs">
+                    <input [(ngModel)]="p2.x" name="point2X" type="number" class="form-control" id="x2" placeholder="X" />
+                    <input [(ngModel)]="p2.y" name="point2Y" type="number" class="form-control" id="y2" placeholder="Y" />
+                  </div>
+                </div>
+              
+                <div class="form-group">
+                  <label for="point3" class="point-label">Point 3:</label>
+                  <div class="point-inputs">
+                    <input [(ngModel)]="p3.x" name="point3X" type="number" class="form-control" id="x3" placeholder="X" />
+                    <input [(ngModel)]="p3.y" name="point3Y" type="number" class="form-control" id="y3" placeholder="Y" />
+                  </div>
+                </div>
+              
+                <div class="form-group">
+                  <label for="a">A:</label>
+                  <input [(ngModel)]="a" name="a" type="number" class="form-control" id="a" />
+                </div>
+              
+                <div class="form-group">
+                  <label for="b">B:</label>
+                  <input [(ngModel)]="b" name="b" type="number" class="form-control" id="b" />
+                </div>
+              </form>
+        </div>
+      </div>
+  
+      <!-- Graph on the right -->
+      <div class="col-md-8">
+        <div class="graph">
+          <!-- Use the graph component with the parameters -->
+          <graph [p1]="p1" [p2]="p2" [p3]="p3" [a]="a" [b]="b"></graph>
+        </div>
+      </div>
     </div>
-    
-    <div class="graph">
-        <!-- Use the graph component with the parameters -->
-        <graph [p1]="p1" [p2]="p2" [p3]="p3" [a]="a" [b]="b"></graph>
-    </div>
-</div>
+  </div>
+  
