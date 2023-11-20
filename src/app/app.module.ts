@@ -14,6 +14,8 @@ import { FigurespageComponent } from './pages/figurespage/figurespage.component'
 import { VicsekFractalComponent } from './pages/fractalpage/vicsek-fractal/vicsek-fractal.component';
 import { NewtonFractalComponent } from './pages/fractalpage/newton-fractal/newton-fractal.component';
 import { GraphComponent } from './pages/figurespage/graph/graph.component';
+import { NewtonlearnComponent } from './newtonlearn/newtonlearn.component';
+import { ViesceklearnComponent } from './viesceklearn/viesceklearn.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { GraphComponent } from './pages/figurespage/graph/graph.component';
     FigurespageComponent,
     VicsekFractalComponent,
     NewtonFractalComponent,
-    GraphComponent
+    GraphComponent,
+    NewtonlearnComponent,
+    ViesceklearnComponent
   ],
   imports: [
     BrowserModule,

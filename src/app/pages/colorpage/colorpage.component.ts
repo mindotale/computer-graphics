@@ -14,17 +14,14 @@ export class ColorpageComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
 
-<<<<<<< HEAD
   ngOnInit () {
     this.hslInputValue = "HSL";
     this.cmykInputValue = "CMYK";
   }
-=======
   x: number = 0;
   y: number = 0;
   width: number = 100;
   height: number = 100;
->>>>>>> 9c37d783d4130db4dc079377c38f808dfafb22f5
 
   openFileExplorer() {
     this.fileInput.nativeElement.click();
@@ -57,28 +54,7 @@ export class ColorpageComponent implements OnInit {
     const ctx = canvas.getContext('2d');
     canvas.width = image.width;
     canvas.height = image.height;
-    canvas.addEventListener("click", function (event) {
-      // Get the click coordinates relative to the canvas
-      var x = event.clientX - canvas.getBoundingClientRect().left;
-      var y = event.clientY - canvas.getBoundingClientRect().top;
-
-      // Get the pixel data at the clicked coordinates
-      var pixelData = ctx?.getImageData(x, y, 1, 1).data;
-      if(pixelData == undefined)
-      {
-        console.log("tilt");
-        return;
-      }
-      const [r, g, b] = [pixelData[0], pixelData[1], pixelData[2]];
-      console.log([r, g, b]);
-      const hslValues = chroma(r, g, b).hsl();
-      const cmykColor = chroma(r, g, b).cmyk();
-    
-      console.log(hslValues);
-      console.log(cmykColor);
-      // Log the coordinates and pixel color information to the console
-     
-  });
+    canvas.addEventListener("click", this.pixelClickHandler);
     ctx?.drawImage(image, 0, 0);
   }
 
@@ -151,5 +127,32 @@ export class ColorpageComponent implements OnInit {
   getPixelData(){
     
   }
+  pixelClickHandler = (event: MouseEvent) => {
+    // Get the click coordinates relative to the canvas
+    const canvas = this.canvas.nativeElement;
+    var x = event.clientX - canvas.getBoundingClientRect().left;
+    var y = event.clientY - canvas.getBoundingClientRect().top;
+    const ctx = canvas.getContext('2d');
+    // Get the pixel data at the clicked coordinates
+    var pixelData = ctx?.getImageData(x, y, 1, 1).data;
+    if(pixelData == undefined)
+    {
+      console.log("tilt");
+      return;
+    }
+    const [r, g, b] = [pixelData[0], pixelData[1], pixelData[2]];
+    const hslValues = chroma(r, g, b).hsl();
 
+
+    this.hslInputValue = Math.round(hslValues[0]).toString() +  " " 
+    + Math.round(hslValues[1]).toString() + " "
+    + Math.round(hslValues[2]).toString();
+    const cmykValues = chroma(r, g, b).cmyk();
+    console.log(cmykValues);
+    
+    this.cmykInputValue = Math.abs(r - 255).toString() +  " " 
+    + Math.abs(g - 255).toString() + " "
+    + Math.abs(b - 255).toString() + " "
+    + Math.round(cmykValues[3] * 255).toString();
+}
 }

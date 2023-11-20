@@ -7,6 +7,8 @@ import { ColorpageComponent } from './pages/colorpage/colorpage.component';
 import { AboutpageComponent } from './pages/aboutpage/aboutpage.component';
 import { LearnpageComponent } from './pages/learnpage/learnpage.component';
 import { FigurespageComponent } from './pages/figurespage/figurespage.component';
+import { NewtonlearnComponent } from './newtonlearn/newtonlearn.component';
+import { ViesceklearnComponent } from './viesceklearn/viesceklearn.component';
 
 const routes: Routes = [
   { path: 'mainpage', component: MainpageComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'figure-transformation', component: FigurespageComponent},
   { path: 'about-us', component: AboutpageComponent},
   { path: 'learn-more', component: LearnpageComponent},
+  { path: 'newton-learn', component: NewtonlearnComponent},
+  { path: 'viescek-learn', component: ViesceklearnComponent},
   { path: '', redirectTo: '/mainpage', pathMatch: 'full' }, // Redirect to Page 1 on initial load
 ];
 
